@@ -1,20 +1,20 @@
-.. Inverse Perspective Kinematics documentation master file, created by
+.. Inverse Perspective Mapping documentation master file, created by
    sphinx-quickstart on Fri Mar  4 19:52:06 2022.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Inverse Perspective Kinematics's documentation!
-==========================================================
+Inverse Perspective Mapping (IPM)
+=================================
+
+Inverse Perspective Mapping (IPM) is the process of converting 2D points from images into 3D points
+without using depth information, by assuming the points lie on an arbitrary plane. 
+
+The project is hosted on `Github`_ by ROS Sports. **Issues and Pull Requests are welcome!**
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :hidden:
 
+   installation
+   tutorial
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. _Github: https://github.com/ros-sports/ipm

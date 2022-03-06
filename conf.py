@@ -17,9 +17,9 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Inverse Perspective Kinematics'
-copyright = '2022, Kenji Brameld'
-author = 'Kenji Brameld'
+project = 'Inverse Perspective Mapping'
+copyright = '2022, ROS Sports'
+author = 'ROS Sports'
 
 
 # -- General configuration ---------------------------------------------------
@@ -29,7 +29,6 @@ author = 'Kenji Brameld'
 # ones.
 extensions = [
   'sphinx_copybutton',
-  'sphinx_tabs.tabs',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
