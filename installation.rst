@@ -3,7 +3,7 @@ Installation
 
 .. warning::
 
-   This package targets **ROS2 Foxy onwards**. It won't compile on all ROS1
+   This package targets **ROS2 Humble onwards**. It won't compile on all ROS1
    and older ROS2 distros.
 
 Source Installation
