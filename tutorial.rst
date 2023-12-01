@@ -7,7 +7,7 @@ The IPM repo features multiple components. The main ones are:
 
 * The :ref:`IPM Library`, which is a vectorized implementation of the IPM projection. It exposes a Python API, that can be used directly.
 * The :ref:`IPM Service`, which wraps the IPM library in a ROS 2 service. It can be used perform language agnostic IPM projections using normal ROS interfacing.
-* The IPM Image Node, which can be used to directly project images (e.g. from a camera) or masks onto a given plane. It essentially listens to a image topic, related camera info and TF to publish a point cloud containing the projected pixels.
+* The :ref:`IPM Image Node`, which can be used to directly project images (e.g. from a camera) or masks onto a given plane. It essentially listens to a image topic, related camera info and TF to publish a point cloud containing the projected pixels.
 
 .. _IPM Library:
 
@@ -373,3 +373,109 @@ Look there if you get any non zero results.
 
 The IPM service also provides a fast way to project many points at once without resulting in too many service calls.
 You can use the `/map_points` service, which accepts a point cloud as input.
+
+.. _IPM Image Node:
+
+IPM Image Node
+==============
+
+The IPM image node is a ROS 2 node that can be used to directly project images (e.g. from a camera) or masks onto a given plane. 
+It is the most user friendly way to use the IPM projection and is the recommended way to use the IPM projection in most cases.
+
+In this tutorial we will use the IPM image node to project a full image onto the ground plane. 
+To do this in a more or less realistic way, we will use the `turtlebot3` simulation in Gazebo.
+
+First of all we need to install the `turtlebot3-gazebo` ROS 2 package.
+
+.. code-block:: bash
+
+    sudo apt install ros-$ROS_DISTRO-turtlebot3-gazebo
+
+In addition to that we need to clone the `turtlebot3` ROS 2 packages from GitHub into our colcon workspace.
+
+.. code-block:: bash
+
+    git clone git@github.com:ROBOTIS-GIT/turtlebot3.git 
+
+Now we can build our workspace using the following command:
+
+.. code-block:: bash
+
+    colcon build
+
+After that we need to source our workspace so we know about the new packages.
+
+.. code-block:: bash
+
+    source install/setup.bash
+
+
+Then we can launch the simulation using the following command:
+
+.. code-block:: bash
+
+    TURTLEBOT3_MODEL=waffle_pi ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
+
+You should see the following view in Gazebo:
+
+.. image:: images/turtlebot_gazebo_view.png
+   :width: 100%
+   :align: center
+   :alt: Turtlebot3 in Gazebo
+
+Now we can launch the IPM image node using the following command. 
+Note that we are remapping topics to be compliant with the turtlebot3 simulation topic names.
+We also set two parameters to define the output frame and the type of the input image.
+The projection of full rgb images is not very common except for visualization purposes, but it is a good way to test the IPM image node.
+Normally one would e.g. project only the non zero points of a mask segmenting e.g. road markings onto the ground. 
+This can be done by setting the `type` parameter to `mask`. 
+To increase performance, one can also set the `scale` parameter to a value smaller than 1. 
+This results in fewer points being projected and thus less computation time.
+
+.. code-block:: bash
+
+    ros2 run ipm_image_node ipm --ros-args \
+        -r camera_info:=/camera/camera_info \
+        -r input:=/camera/image_raw \
+        -p type:=rgb_image \
+        -p output_frame:=odom
+
+You can add the following xml to a launch file to launch the IPM image node.
+
+.. code-block:: xml
+
+    <launch>
+        <node pkg="ipm_image_node" type="ipm" name="ipm_image_node" output="screen">
+            <remap from="camera_info" to="/camera/camera_info"/>
+            <remap from="input" to="/camera/image_raw"/>
+            <param name="type" value="rgb_image"/>
+            <param name="output_frame" value="odom"/>
+        </node>
+    </launch>
+
+Now we can open RViz2 and add the point cloud display to visualize the result on topic `/projected_point_cloud`. 
+For better visibility you can set the style to `Points`. 
+You also want to set the Fixed Frame to `odom` to see the result in the correct frame.
+Adding the robot model as well as the TF display can also be helpful to see the spatial relationship between the robot and the projection plane.
+
+You should see the following view in RViz:
+
+.. image:: images/turtlebot_rviz_projection1.png
+   :width: 100%
+   :align: center
+   :alt: Turtlebot3 in RViz with IPM projection
+
+You can now move the robot around in Gazebo and see the projection change in RViz. 
+Note that the projection is only useful for things close to the ground plane.
+To move the robot around you can use the following command:
+
+.. code-block:: bash
+
+    ros2 run turtlebot3_teleop teleop_keyboard
+
+You could see the following view in RViz after moving the robot around:
+
+.. image:: images/turtlebot_rviz_projection2.png
+   :width: 100%
+   :align: center
+   :alt: Turtlebot3 in RViz with IPM projection
