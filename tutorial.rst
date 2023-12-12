@@ -291,7 +291,7 @@ The same is true for the y-axis, but the point will move along the green y-axis.
    :align: center
    :alt: IPM RViz for Point (1000, 1000)
 
-If you align the camera with the plane (so you look edge-on), you can see that the point will not move in the z direction.
+If you align your view with the plane (so you look edge-on), you can see that the point will not move in the z direction.
 
 .. image:: images/rviz_ipm_lib_aligned_with_plane.png
    :width: 100%
