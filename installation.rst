@@ -1,3 +1,5 @@
+.. _Installation:
+
 Installation
 ############
 
@@ -17,9 +19,10 @@ Source Installation
 Cloning repositories
 ====================
 
-In your ROS2 workspace, clone the repository and build it:
+In your ROS2 workspace, clone the repository, install the dependencies and build it:
 
 .. code-block:: console
 
    git clone https://github.com/ros-sports/ipm.git src/ipm
+   rosdep install --from-paths src --ignore-src -r -y
    colcon build
