@@ -8,7 +8,7 @@ Overview
 
 Soccer IPM is a ROS package that provides a node to project 2D image space detections of soccer related objects (e.g., balls, goal posts, robots, etc.) to 3D world space. 
 The node uses the camera calibration parameters as well as the forward kinematics of the robot to perform the projection.
-It is assumed that all object are on the ground plane.
+It is assumed that all objects are on the ground plane.
 The input detections are expected to be in the form of `soccer_vision_2d_msgs <https://github.com/ros-sports/soccer_interfaces/tree/rolling/soccer_vision_2d_msgs/msg>`_ messages.
 The projected detections are published in the form of `soccer_vision_3d_msgs <https://github.com/ros-sports/soccer_interfaces/tree/rolling/soccer_vision_3d_msgs/msg>`_ messages as defined in the `soccer_interfaces <https://github.com/ros-sports/soccer_interfaces>`_.
 
@@ -32,7 +32,7 @@ Publications
 ------------
 
 - ``balls_relative``: Publishes the detected balls in the given output frame.
-- ``goal_posts_relative``: Publishes the detected goal posts in the given output frame.
+- ``goal_posts_relative``: Publishes the detected goalposts in the given output frame.
 - ``robots_relative``: Publishes the detected robots in the given output frame.
 - ``obstacles_relative``: Publishes the detected obstacles in the given output frame.
 - ``field_boundary_relative``: Publishes the detected field boundary in the given output frame.
@@ -42,7 +42,7 @@ Publications
 How do I use it?
 ================
 
-First of all you need to download the repo as well as its dependencies and build the package in your workspace.
+First of all, you need to download the repo as well as its dependencies and build the package in your workspace.
 You can do this by running the following commands:
 
 .. code-block:: bash
@@ -105,7 +105,7 @@ You probably want to do this using a launch file. For example, you can use the f
       output_frame: 'base_footprint'
 
 The `soccer_ipm.yaml` config file contains the parameters of our node. 
-They mainly include the ball diameter (the ball projection is performed on an elevated plane for less errors due to object depth), 
+They mainly include the ball diameter (the ball projection is performed on an elevated plane for less error due to object depth), 
 the output frame (the frame in which the output is published), 
 and the default dimensions of the objects.
 They also include the ``footpoint_out_of_image_threshold`` parameter which is used to determine whether the footpoint of an object is out of the image or not.
@@ -135,7 +135,7 @@ This launch file can be used to adjust the topic names and ball diameter to matc
    </launch>
 
 
-The resulting visualization could look like this (note that this image also shows a visualization of the :ref:`IPM Image Node`, which not only projects the detections, but also the image itself to the world space).
+The resulting visualization could look like this (note that this image also shows a visualization of the :ref:`IPM Image Node`, which not only projects the detections but also the image itself to the world space).
 You can see the ball as well as the robot detections on the field.
 
 .. image:: images/ipm2_crop.png
