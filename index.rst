@@ -17,7 +17,7 @@ without using depth information, by assuming the points lie on an arbitrary plan
    IPM applied to project the camera image as well as some detected objects onto the ground plane in a soccer robot scenario.
 
 This package provides a general implementation of inverse perspective mapping for ROS. 
-For a downstream package that uses this package to project balls etc. for soccer playing robots, see `Soccer IPM <https://github.com/ros-sports/soccer_ipm>`_.
+For a downstream package that uses this package to project balls etc. for soccer playing robots, see :ref:`SoccerIPM`.
 
 The project is hosted on `Github`_ by ROS Sports. **Issues and Pull Requests are welcome!**
 
@@ -28,5 +28,6 @@ To get started look at the :ref:`Tutorial`.
 
    installation
    tutorial
+   soccer
 
 .. _Github: https://github.com/ros-sports/ipm

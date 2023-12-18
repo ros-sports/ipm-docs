@@ -18,7 +18,7 @@ The IPM image node is a ROS 2 node that can be used to directly project images (
 It is the most user friendly way to use the IPM projection and is the recommended way to use the IPM projection in many cases.
 
 The :ref:`IPM Library` and the :ref:`IPM Service` are more flexible and can be used to project points in a more general way.
-They are e.g. used for the `Soccer IPM <https://github.com/ros-sports/soccer_ipm>`_ node, which projects `soccer_vision_2d_msgs <https://github.com/ros-sports/soccer_interfaces/tree/rolling/soccer_vision_2d_msgs/msg>`_ from the `soccer_interfaces <https://github.com/ros-sports/soccer_interfaces>`_ package onto the ground plane.
+They are e.g. used for the :ref:`SoccerIPM` node, which projects `soccer_vision_2d_msgs <https://github.com/ros-sports/soccer_interfaces/tree/rolling/soccer_vision_2d_msgs/msg>`_ from the `soccer_interfaces <https://github.com/ros-sports/soccer_interfaces>`_ package onto the ground plane.
 
 In this tutorial, we will use the IPM image node to project a full image onto the ground plane. 
 To do this in a more or less realistic way, we will use the `turtlebot3` simulation in Gazebo.
