@@ -42,7 +42,24 @@ Publications
 How do I use it?
 ================
 
-To launch the Soccer IPM node, you can use the following command (assuming you have build and sourced your workspace properly):
+First of all you need to download the repo as well as its dependencies and build the package in your workspace.
+You can do this by running the following commands:
+
+.. code-block:: bash
+
+   git clone https://github.com/ros-sports/soccer_ipm.git src/soccer_ipm
+   rosdep install --from-paths src --ignore-src -r -y
+   colcon build
+
+
+Now you can source the workspace again to make the package available in your environment:
+
+.. code-block:: bash
+
+   source install/setup.bash
+
+
+To launch the Soccer IPM node, you can use the following command (note that you need to provide the path to the config file described below):
 
 .. code-block:: bash
 
@@ -57,6 +74,7 @@ You probably want to do this using a launch file. For example, you can use the f
    </node>
 
 .. code-block:: yaml
+   :caption: soccer_ipm.yaml
   
    soccer_ipm:
     ros__parameters:
