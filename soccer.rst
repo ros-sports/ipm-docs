@@ -6,7 +6,7 @@ Soccer IPM
 Overview
 ========
 
-Soccer IPM is a ROS package that provides a node to project 2D image space detections of soccer related objects (e.g., balls, goal posts, robots, etc.) to 3D world space. 
+Soccer IPM is a ROS package that provides a node to project 2D image space detections of soccer related objects (e.g., balls, goal posts, robots, etc.) to 3D space. 
 The node uses the camera calibration parameters as well as the forward kinematics of the robot to perform the projection.
 It is assumed that all objects are on the ground plane.
 The input detections are expected to be in the form of `soccer_vision_2d_msgs <https://github.com/ros-sports/soccer_interfaces/tree/rolling/soccer_vision_2d_msgs/msg>`_ messages.
