@@ -112,7 +112,7 @@ and the default dimensions of the objects.
 They also include the ``footpoint_out_of_image_threshold`` parameter which is used to determine whether the footpoint of an object is out of the image or not.
 Objects with a footpoint below this fraction of the image height are considered to be out of the image.
 If the real footpoint of an object is not visible, it is ignored as using the lowest point of the object as its footpoint will result in a wrong projection.
-The ``use_distortion`` parameter is used to determine whether to use the distortion parameters from the camera info or not. Don't use them if you detect the objects in an rectified image.
+The ``use_distortion`` parameter is used to determine whether to use the distortion parameters from the camera info or not. Don't use them if you detect the objects in an already rectified image.
 
 Visualization
 =============
