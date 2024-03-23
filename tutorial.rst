@@ -126,6 +126,9 @@ You could see the following view in RViz after moving the robot around:
 
 |
 
+If you are using a camera with significant distortion and don't rectify the image, 
+you can set the `use_distortion` ROS parameter to `true` to use the distortion model 
+from the camera info message in the projection. 
 
 .. _IPM Library:
 
@@ -182,7 +185,9 @@ Please read the comments in the code to understand what is needed for the projec
                 ),
                 width=2048,
                 height=1536,
-                k=[1338.64532, 0., 1026.12387, 0., 1337.89746, 748.42213, 0., 0., 1.])
+                k=[1338.64532, 0., 1026.12387, 0., 1337.89746, 748.42213, 0., 0., 1.],
+                d=[0., 0., 0., 0., 0.] # The distortion coefficients are optional
+            )
 
             # We want to publish the projected points on a topic so we can visualize them in RViz
             self.point_pub = self.create_publisher(PointStamped, 'ipm_point', 10)
@@ -194,7 +199,9 @@ Please read the comments in the code to understand what is needed for the projec
             # Initialize the IPM library with a reference to the forward kinematics of the robot
             # We also need to provide the camera info, this is optional during the initialization
             # as it can be provided via a setter later on as well
-            self.ipm = IPM(self.tf_buffer, self.camera_info)
+            # We can also set the distortion parameter to True if we want to use the distortion model 
+            # from the camera info and don't want to rectify the image beforehand
+            self.ipm = IPM(self.tf_buffer, self.camera_info, distortion=True)
 
             # We will now define the plane we want to project onto
             # The plane is defined by a normal and a distance to the origin
@@ -336,7 +343,9 @@ In this case, a NumPy array instead of the Point2D ROS message is used as our in
                 ),
                 width=2048,
                 height=1536,
-                k=[1338.64532, 0., 1026.12387, 0., 1337.89746, 748.42213, 0., 0., 1.])
+                k=[1338.64532, 0., 1026.12387, 0., 1337.89746, 748.42213, 0., 0., 1.],
+                d=[0., 0., 0., 0., 0.] # The distortion coefficients are optional
+            )
 
             # We want to publish the projected points on a topic so we can visualize them in RViz
             self.point_cloud_pub = self.create_publisher(PointCloud2, 'ipm_points', 10)
@@ -348,7 +357,9 @@ In this case, a NumPy array instead of the Point2D ROS message is used as our in
             # Initialize the IPM library with a reference to the forward kinematics of the robot
             # We also need to provide the camera info, this is optional during the initialization
             # as it can be provided via a setter later on as well
-            self.ipm = IPM(self.tf_buffer, self.camera_info)
+            # We can also set the distortion parameter to True if we want to use the distortion model
+            # from the camera info and don't want to rectify the image beforehand
+            self.ipm = IPM(self.tf_buffer, self.camera_info, distortion=True)
 
             # We will now define the plane we want to project onto
             # The plane is defined by a normal and distance to the origin
@@ -491,3 +502,6 @@ Look there if you get any non-zero results.
 
 The IPM service also provides a fast way to project many points at once without resulting in too many service calls.
 You can use the `/map_points` service, which accepts a point cloud as input.
+
+Similarly to the `ipm_image_node`, you can set the `use_distortion` ROS parameter to `true` to use the distortion model 
+from the camera info in the projection and not rectify the image beforehand.
